@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import ItemsList from "./ItemsList";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+ return (
+  <div className="bg-gray-200">
+   <div className="bg-white h-16 border">navbar</div>
+   <div className="h-16 border rounded-xl border-white m-5">لیست خودروها</div>
+   <div className="md:flex justify-evenly gap-5 p-5">
+    <div className="border border-white rounded-xl md:w-1/4 h-80">sidebar</div>
+    <div className="md:w-3/4">
+     <ItemsList />
     </div>
-  );
+   </div>
+  </div>
+ );
 }
 
 export default App;
