@@ -4,10 +4,11 @@ import { HiDotsVertical } from "react-icons/hi";
 const Item = ({ status, title, plaque, columns }) => {
  const [isOpen, setIsOpen] = useState(false);
  const closeDropdown = useRef(null);
- const closeOpenMenus = (e) => {
-  if (!closeDropdown.current.contains(e.target)) setIsOpen(false);
+ const hide = (e) => {
+  !closeDropdown.current?.contains(e.target) && setIsOpen(false);
  };
- document.addEventListener("mousedown", closeOpenMenus);
+ document.addEventListener("mousedown", hide);
+
  return (
   <div
    ref={closeDropdown}
@@ -16,7 +17,7 @@ const Item = ({ status, title, plaque, columns }) => {
   >
    <HiDotsVertical
     size={"35px"}
-    className="absolute p-1 top-2 left-1 text-gray-500 hover:text-white hover:bg-gray-500 rounded-full duration-200 cursor-pointer "
+    className="absolute p-1 top-2 left-1 text-gray-500 hover:text-white hover:bg-gray-500 rounded-full duration-200 cursor-pointer"
     onClick={(e) => {
      setIsOpen(!isOpen);
      e.stopPropagation();
@@ -24,7 +25,7 @@ const Item = ({ status, title, plaque, columns }) => {
    />
    {isOpen && (
     <div
-     className="absolute top-6 left-7 text-center border-2 rounded-r-xl rounded-b-xl child:rounded-xl shadow-lg child:duration-200 child:cursor-pointer child:p-2 bg-white child-hover:bg-gray-300"
+     className="absolute top-6 left-7 text-center border-2 rounded-r-xl rounded-b-xl bg-white child:rounded-xl shadow-lg child:duration-200 child:cursor-pointer child:p-2 child-hover:bg-gray-300"
      onClick={(e) => e.stopPropagation()}
     >
      <div>مشاهده جزئیات</div>
