@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 
 const Item = ({ status, title, plaque, columns }) => {
  const [isOpen, setIsOpen] = useState(false);
+ const closeDropdown = useRef(null);
+ const closeOpenMenus = (e) => {
+  if (!closeDropdown.current.contains(e.target)) setIsOpen(false);
+ };
+ document.addEventListener("mousedown", closeOpenMenus);
  return (
   <div
+   ref={closeDropdown}
    className="relative flex justify-between m-3 bg-white rounded-2xl shadow-xl"
    onClick={() => setIsOpen(false)}
   >
@@ -16,15 +22,15 @@ const Item = ({ status, title, plaque, columns }) => {
      e.stopPropagation();
     }}
    />
-   <div
-    className={`${
-     isOpen ? "block" : "hidden"
-    } absolute top-6 left-7 text-center border-2 rounded-r-xl rounded-b-xl child:rounded-xl shadow-lg child:duration-200 child:cursor-pointer child:p-2 bg-white child-hover:bg-gray-300`}
-    onClick={(e) => e.stopPropagation()}
-   >
-    <div>مشاهده جزئیات</div>
-    <div>تاریخچه پلاک</div>
-   </div>
+   {isOpen && (
+    <div
+     className="absolute top-6 left-7 text-center border-2 rounded-r-xl rounded-b-xl child:rounded-xl shadow-lg child:duration-200 child:cursor-pointer child:p-2 bg-white child-hover:bg-gray-300"
+     onClick={(e) => e.stopPropagation()}
+    >
+     <div>مشاهده جزئیات</div>
+     <div>تاریخچه پلاک</div>
+    </div>
+   )}
    <div
     className={`flex items-center rounded-r-2xl text-white p-2 ${
      status === "فعال" ? "bg-[#11DA00]" : "bg-[#F4B000]"
